@@ -22,5 +22,5 @@ The following approach has been followed: -
 •	The JSON query is formulated and displayed below the form
 •	Reset button will reset the form
 
-The entire Example folder has to be copied and the index.html file has to be open with a browser.
+The entire folder has to be downloaded and the index.html file has to be open with a browser.
 

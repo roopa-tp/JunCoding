@@ -2,9 +2,9 @@
 <html>
 <head>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">	
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 	<script src="app.js"></script>
 	<link rel="stylesheet" type="text/css" href="style.css">
 	<h1>Juniper Coding Challenge</h1>
@@ -25,13 +25,13 @@
 			
 				<label>{{startTimeLabel}}</label>
 				<img id="Img" src="questionMark.jpg" title="Start Time in UNIX Epoch format"/><br>
-				<input type="number" min="0" name="startTime" id="startTime" class="form-control" ng-model="startTime" ng-change="checkTime()" required/>				
+				<input type="number" min="0" name="startTime" id="startTime" class="form-control" ng-model="startTime" ng-change="checkTime()" ng-blur="checkTime()" required/>				
 				<div class="help-block error" ng-show="junForm.startTime.$touched && junForm.startTime.$invalid">{{startTimeReqMsg}}</div>
 				<br>			
 
 				<label>{{endTimeLabel}}</label>
 				<img id="Img" src="questionMark.jpg" title="End Time in UNIX Epoch format"/><br>
-				<input type="number" min="0" name="endTime" id="endTime" class="form-control" ng-model="endTime" ng-change="checkTime()" required/>				
+				<input type="number" min="0" name="endTime" id="endTime" class="form-control" ng-model="endTime" ng-change="checkTime()" ng-blur="checkTime()" required/>				
 				<div class="help-block error" ng-show="junForm.endTime.$touched && junForm.endTime.$invalid">{{endTimeReqMsg}}</div>
 				
 

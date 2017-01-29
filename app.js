@@ -29,7 +29,7 @@ app.controller('formCtrl', function($scope) {
     $scope.operators = ['=','!='];
 
     $scope.checkTime = function() {
-	if($scope.startTime && $scope.endTime){
+	if($scope.startTime!=null && $scope.endTime!=null){
 		if($scope.startTime > $scope.endTime){
 			$scope.wrongRange = true;
 		}

@@ -1,4 +1,5 @@
 # JunCoding
 
-The entire folder can be downloaded and the index.html file has to be open with a browser.
+The HTML, JS , CSS and the JPEG files has to be downloaded and placed in a single directory.
+Open the index.html file with a browser.
 

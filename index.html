@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">	
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	<script src="app.js"></script>
+	<link rel="stylesheet" type="text/css" href="style.css">
+	<h1>Juniper Coding Challenge</h1>
+</head>
+<body>	
+	<div ng-app="junApp" ng-controller="formCtrl">		
+		<br><br>
+		 <ng-form id="junForm" name="junForm" >
+		 	<div ng-class="{'has-error': junForm.$invalid}" class="form-group center_div" >
+				<h6 lass="help-block error">**Please fill all the fields**</h6>
+			
+				<label>{{tableNameLabel}}</label>
+				<img id="Img" src="questionMark.jpg" title="Table Name used for the query"/>
+				<input type="text" name="tableName" id="tableName" class="form-control" ng-model="tableName" required/>								
+				<div class="help-block error" ng-show="junForm.tableName.$touched && junForm.tableName.$invalid">{{tableNameReqMsg}}</div>
+				<br>			
+				
+			
+				<label>{{startTimeLabel}}</label>
+				<img id="Img" src="questionMark.jpg" title="Start Time in UNIX Epoch format"/><br>
+				<input type="number" min="0" name="startTime" id="startTime" class="form-control" ng-model="startTime" ng-change="checkTime()" required/>				
+				<div class="help-block error" ng-show="junForm.startTime.$touched && junForm.startTime.$invalid">{{startTimeReqMsg}}</div>
+				<br>			
+
+				<label>{{endTimeLabel}}</label>
+				<img id="Img" src="questionMark.jpg" title="End Time in UNIX Epoch format"/><br>
+				<input type="number" min="0" name="endTime" id="endTime" class="form-control" ng-model="endTime" ng-change="checkTime()" required/>				
+				<div class="help-block error" ng-show="junForm.endTime.$touched && junForm.endTime.$invalid">{{endTimeReqMsg}}</div>
+				
+
+				<p class="help-block error" ng-show = "wrongRange">{{wrongRangeMsg}}</p>
+
+				<br>
+				<br>
+
+				<label class="col-md-2">{{sourceVnLabel}}</label>			      
+				<select class="col-md-4" ng-model="source_vn" name="source_vn" id="source_vn"
+            			        ng-options="source_vn as source_vn for source_vn in sourceVN" required >
+   			 	</select>
+				<div class="help-block error" ng-show="junForm.source_vn.$touched && junForm.source_vn.$invalid">{{sourceVnReqMsg}}</div>
+			     	<p ng-show="source_vn"> <label class="col-md-2">{{operatorLabel}}</label></td> 
+				<select class="col-md-4" ng-show="source_vn" ng-model="operator_source_vn" name="operator_source_vn" id="operator_source_vn" 
+            			        ng-options="operator_source_vn as operator_source_vn for operator_source_vn in operators" required>
+   		  		</select>
+				<div class="help-block error" ng-show="junForm.operator_source_vn.$touched && junForm.operator_source_vn.$invalid">{{sourceVNOperatorReqMsg}}</div>
+			  	</p>
+
+				<br>
+				<br>
+ 
+				<label class="col-md-2">{{sourcePortLabel}}</label>			      
+				<select class="col-md-4" ng-model="source_port" name="source_port" id="source_port"
+            			        ng-options="source_port as source_port for source_port in sourcePort" required >
+   			 	</select>
+				<div class="help-block error" ng-show="junForm.source_port.$touched && junForm.source_port.$invalid">{{sourcePortReqMsg}}</div>
+			     	<p ng-show="source_port"> <label class="col-md-2">{{operatorLabel}}</label></td> 
+				<select class="col-md-4" ng-show="source_port" ng-model="operator_source_port" name="operator_source_port" id="operator_source_port" 
+            			        ng-options="operator_source_port as operator_source_port for operator_source_port in operators" required>
+   		  		</select>
+				<div class="help-block error" ng-show="junForm.operator_source_port.$touched && junForm.operator_source_port.$invalid">{{sourcePortOperatorReqMsg}}</div>
+			  	</p>
+
+				<br>
+				<br>
+
+				<label class="col-md-2">{{destinationVnLabel}}</label>			      
+				<select class="col-md-4" ng-model="destination_vn" name="destination_vn" id="destination_vn"
+            			        ng-options="destination_vn as destination_vn for destination_vn in destinationVN" required >
+   			 	</select>
+				<div class="help-block error" ng-show="junForm.destination_vn.$touched && junForm.destination_vn.$invalid">{{destinationVnReqMsg}}</div>
+			     	<p ng-show="destination_vn"> <label class="col-md-2">{{operatorLabel}}</label></td> 
+				<select class="col-md-4" ng-show="destination_vn" ng-model="operator_destination_vn" name="operator_destination_vn" id="operator_destination_vn" 
+            			        ng-options="operator_destination_vn as operator_destination_vn for operator_destination_vn in operators" required>
+   		  		</select>
+				<div class="help-block error" ng-show="junForm.operator_destination_vn.$touched && junForm.operator_destination_vn.$invalid">{{destinationVnOperatorReqMsg}}</div>
+			  	</p>
+
+				<br>
+				<br>
+				<label class="col-md-2">{{destinationPortLabel}}</label>			      
+				<select class="col-md-4" ng-model="destination_port" name="destination_port" id="destination_port"
+            			        ng-options="destination_port as destination_port for destination_port in destinationPort" required >
+   			 	</select>
+				<div class="help-block error" ng-show="junForm.destination_port.$touched && junForm.destination_port.$invalid">{{destinationPortReqMsg}}</div>
+			     	<p ng-show="destination_port"> <label class="col-md-2">{{operatorLabel}}</label></td> 
+				<select class="col-md-4" ng-show="destination_port" ng-model="operator_destination_port" name="operator_destination_port" id="operator_destination_port" 
+            			        ng-options="operator_destination_port as operator_destination_port for operator_destination_port in operators" required>
+   		  		</select>
+				<div class="help-block error" ng-show="junForm.operator_destination_port.$touched && junForm.operator_destination_port.$invalid">{{destinationPortOperatorReqMsg}}</div>
+			  	</p>
+
+			    	<br>
+				<br>
+				<br>
+				<br>
+				<div class="row">
+					<div class="col-sm-12 text-center">
+       						<button id="btnSubmit" ng-disabled="junForm.$invalid || wrongRange" class="btn btn-primary btn-md center-block" Style="width: 100px;" ng-click="submit()" >Submit</button>
+	       					<button id="btnReset"  class="btn btn-primary btn-md center-block" Style="width: 100px;" ng-click="reset()" >Reset</button>
+   					</div>
+				</div>
+				<br>
+	
+				<p ng-show="displayQuery">{{jsonQuery}}</p>
+
+				<br>
+				<br>
+	
+			</div>			
+			   
+		 </ng-form>
+		
+        </div>
+
+</body>
+</html>

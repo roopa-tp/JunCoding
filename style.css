@@ -1,0 +1,25 @@
+#Img{
+	width: 12px;
+	height: 12px;
+}
+.center_div{
+  	margin: 0 auto;
+	width:60% 
+}
+p {
+	display:inline;
+}
+h1 {
+	text-align : center;
+}
+body {
+	margin: 0;
+	padding: 0;
+}
+#btnSubmit,#btnReset{
+	display: inline-block;
+	vertical-align: top;
+}
+h6 {
+    text-align: right;
+}
